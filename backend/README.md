@@ -7,10 +7,10 @@ This folder contains the Python Flask backend for the Drug Half-Life Visualizer.
 ## 📁 File Structure
 backend/
 ├── app.py            ← Flask server with API routes
-├── database.py       ← SQLite setup and drug data
+├── database.py       ← SQLite setup and drug data (51 drugs)
 ├── requirements.txt  ← Python dependencies
-├── run.py            ← Entry point
-└── .gitignore        ← Ignores drugs.db and cache
+├── run.py            ← Entry point to start server
+└── .gitignore        ← Ignores drugs.db and pycache
 
 ---
 
@@ -26,28 +26,24 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The server runs at `http://localhost:5000`
+Server runs at `http://localhost:5000`
 
-On first run, `drugs.db` is automatically created and seeded with 51 drugs.
+> On first run, `drugs.db` is automatically created and seeded with 51 drugs.
 
 ---
 
 ## 📡 API Routes
 
-### GET `/api/drugs`
-Returns a list of all drug names.
-
-**Example response:**
+### `GET /api/drugs`
+Returns a JSON list of all 51 drug names.
 ```json
 ["Amoxicillin", "Aspirin", "Atenolol", "Caffeine", ...]
 ```
 
 ---
 
-### GET `/api/drug?name=Paracetamol`
+### `GET /api/drug?name=Paracetamol`
 Returns full pharmacokinetic data for one drug.
-
-**Example response:**
 ```json
 {
   "name": "Paracetamol",
@@ -65,8 +61,11 @@ Returns full pharmacokinetic data for one drug.
 
 ---
 
-### GET `/api/drugs/category?name=Antibiotics`
+### `GET /api/drugs/category?name=Antibiotics`
 Returns all drug names in a given category.
+```json
+["Amoxicillin", "Azithromycin", "Ciprofloxacin", ...]
+```
 
 **Available categories:**
 - Painkillers / NSAIDs
@@ -78,23 +77,16 @@ Returns all drug names in a given category.
 - Hormones / Steroids
 - Neurological / Psych
 
-**Example response:**
-```json
-["Amoxicillin", "Azithromycin", "Ciprofloxacin", ...]
-```
-
 ---
 
-## 🗄️ Database
+## 🗄️ Database Schema
 
-The SQLite database (`drugs.db`) is auto-generated on first run from `database.py`.
-
-**Table: `drugs`**
+Table name: `drugs` — auto-generated as `drugs.db` on first run.
 
 | Column | Type | Description |
 |--------|------|-------------|
 | name | TEXT | Drug name (primary key) |
-| category | TEXT | Drug category |
+| category | TEXT | Drug category group |
 | route | TEXT | Administration route (Oral, IV, Inhalation) |
 | description | TEXT | What the drug treats |
 | half_life | REAL | Hours for concentration to halve |

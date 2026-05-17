@@ -6,10 +6,15 @@ This folder contains the Python Flask backend for the Drug Half-Life Visualizer.
 
 ## 📁 File Structure
 backend/
+
 ├── app.py            ← Flask server with API routes
+
 ├── database.py       ← SQLite setup and drug data (51 drugs)
+
 ├── requirements.txt  ← Python dependencies
+
 ├── run.py            ← Entry point to start server
+
 └── .gitignore        ← Ignores drugs.db and pycache
 
 ---
@@ -101,12 +106,17 @@ Table name: `drugs` — auto-generated as `drugs.db` on first run.
 ## 🧪 Testing the API
 
 Once the server is running, test these in your browser:
+
 http://localhost:5000/api/drugs
+
 http://localhost:5000/api/drug?name=Paracetamol
+
 http://localhost:5000/api/drugs/category?name=Antibiotics
 
 ---
 
 ## 📦 Dependencies
+
 flask
+
 flask-cors
